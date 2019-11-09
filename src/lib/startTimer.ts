@@ -1,10 +1,11 @@
 import * as vscode from 'vscode';
+import {mangeTime} from './statusBar';
 let remoteToken: string = vscode.workspace.getConfiguration("remoteId")["static.conf.nili.RemoteId"];
 
 export const setRemoteToken = (_remoteId: string) => {
     remoteToken = _remoteId
 }
-export default () => {
+const startTimer = () => {
     
     let canRestart = false;
     let keyStemps = 0;
@@ -26,6 +27,7 @@ export default () => {
                 vscode.window.showWarningMessage(`send to server:  ${keyStemps} : ${remoteToken}`);
                 canRestart = false;
                 keyStemps= 0;
+                mangeTime();
             }, 3000);
         }
         canRestart = true;
@@ -33,3 +35,5 @@ export default () => {
     })
 
 }
+
+export default startTimer
