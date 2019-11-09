@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-
+import getEditorInfo from './editorInfo';
 let time: number = 0;
 let strTime: string = "00:00";
 let myStatusBarItem: vscode.StatusBarItem;
@@ -19,13 +19,14 @@ export const mangeTime = (amount: number = 3) => {
 }
 
 const statusBarHandler = (context: vscode.ExtensionContext) => {
-	
 	console.log("statusBarHandler", strTime)
 	const myCommandId = 'sample.showSelectionCount';
 	myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
 	myStatusBarItem.command = myCommandId;
 	let showInfo = vscode.commands.registerCommand(myCommandId, () => {
-		vscode.window.showInformationMessage(`Yeah..., you've been active around ${strTime}`);
+		const info = getEditorInfo();
+		const fileName = info ? info.text :"undefind"
+		vscode.window.showInformationMessage(`${strTime} on ${fileName}`);
 	});
 	
 	context.subscriptions.push(showInfo);
