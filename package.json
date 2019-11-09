@@ -12,6 +12,7 @@
 	"activationEvents": [
 		"onCommand:extension.helloWorld",
 		"onCommand:extansion.setUserCongif",
+		"onCommand:extansion.webViewStart",
 		"*"
 	],
 	"main": "./out/extension.js",
@@ -36,6 +37,10 @@
 			{
 				"command": "extansion.setUserCongif",
 				"title": "Set Remote ID"
+			},
+			{
+				"command": "extansion.webViewStart",
+				"title": "webViewStart"
 			}
 		]
 	},
