@@ -32,9 +32,8 @@ const startTimer = () => {
                     for (var i=0; i<arr.byteLength; i++) {
                       str += String.fromCharCode(arr[i]);
                     }
-                    var serializedData = JSON.stringify(str);
-                    let message = JSON.parse(serializedData);
-                    console.log("msg:", message);
+                    let message = JSON.parse(str);
+                    console.log("msg:", message.name);
                  })
                 }
             })
