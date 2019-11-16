@@ -25,6 +25,7 @@ const startTimer = () => {
                 })
             }
             vscode.workspace.findFiles('**/niliConfig.json', '**/node_modules/**', 1).then(result => {
+                console.log("Result: ", result)
                 if(result.length > 0){
                  vscode.window.showWarningMessage("find: ", result[0].path)
                  vscode.workspace.fs.readFile(vscode.Uri.parse(result[0].path)).then(arr =>{

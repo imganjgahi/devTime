@@ -14,12 +14,10 @@ export const mangeTime = (amount: number = 3) => {
 	} else {
 		myStatusBarItem.hide();
 	}
-	console.log("manageTime", strTime)
 
 }
 
 const statusBarHandler = (context: vscode.ExtensionContext) => {
-	console.log("statusBarHandler", strTime)
 	const myCommandId = 'sample.showSelectionCount';
 	myStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 1);
 	myStatusBarItem.command = myCommandId;

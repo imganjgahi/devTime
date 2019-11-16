@@ -4,7 +4,6 @@ import {basename} from 'path';
 
 const getEditorInfo = (): { text?: string; tooltip?: string; color?: string; } | null => {
     const editor = vscode.window.activeTextEditor;
-	console.log("editor: ", editor)
 	let text: string | undefined = "undefined";
     let tooltip: string | undefined;
     if (!editor) {
