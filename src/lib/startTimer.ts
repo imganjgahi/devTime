@@ -32,10 +32,6 @@ const startTimer = () => {
                     for (var i=0; i<arr.byteLength; i++) {
                       str += String.fromCharCode(arr[i]);
                     }
-                  
-                    // Say, 'str' at this step looks like below :
-                    /* {"type": "newEvent", "content": {"rec": [{"id1": "1", "event": "3A=","payload": "EZm9ydW0ub="}]}} */
-                  
                     var serializedData = JSON.stringify(str);
                     let message = JSON.parse(serializedData);
                     console.log("msg:", message);
