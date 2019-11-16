@@ -13,7 +13,7 @@ const startTimer = () => {
     vscode.workspace.onDidChangeTextDocument(()=>{
         keyStemps++;
         if(!canRestart){
-        timer = setInterval(() => {
+        timer = setInterval(async () => {
             clearInterval(timer);
             if(!remoteToken || remoteToken.length === 0){
                 vscode.window.showInputBox({placeHolder: 'set your remote id'}).then((result) => {
@@ -24,6 +24,24 @@ const startTimer = () => {
 
                 })
             }
+            vscode.workspace.findFiles('**/niliConfig.json', '**/node_modules/**', 1).then(result => {
+                if(result.length > 0){
+                 vscode.window.showWarningMessage("find: ", result[0].path)
+                 vscode.workspace.fs.readFile(vscode.Uri.parse(result[0].path)).then(arr =>{
+                    let str = "";
+                    for (var i=0; i<arr.byteLength; i++) {
+                      str += String.fromCharCode(arr[i]);
+                    }
+                  
+                    // Say, 'str' at this step looks like below :
+                    /* {"type": "newEvent", "content": {"rec": [{"id1": "1", "event": "3A=","payload": "EZm9ydW0ub="}]}} */
+                  
+                    var serializedData = JSON.stringify(str);
+                    let message = JSON.parse(serializedData);
+                    console.log("msg:", message);
+                 })
+                }
+            })
                 vscode.window.showWarningMessage(`send to server:  ${keyStemps} : ${remoteToken}`);
                 canRestart = false;
                 keyStemps= 0;
